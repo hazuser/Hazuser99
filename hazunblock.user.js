@@ -1,8 +1,9 @@
 // ==UserScript==
 // @name         HAZ
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @include     https://www.haz.de/*
+// @include     https://www.neuepresse.de/*
 // @description  try to take over the world!
 // @author       You
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
@@ -25,7 +26,12 @@
     }
     if ( article != "" ){
         console.log("article:"+article);
-        divArticle.empty();
+        $('#erasmo').remove();
+        $('.pdb-article-body-paidcontentintro').remove();
+        $('.pdb-article-body-blurred').find('p,h1,h2,h3,h4,h5,h6,span,.pdb-embedimage-caption').remove();
+        $('.pdb-article-body-blurred').removeClass('pdb-article-body-blurred');
+        //divArticle.empty();
+
         divArticle.append("<p>"+article+"</p>");
     }
     //var json = JSON.parse( d );
