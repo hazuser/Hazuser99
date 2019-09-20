@@ -1,11 +1,11 @@
 // ==UserScript==
-// @name         HAZ
+// @name         HAZ+NP Unblocker
 // @namespace    http://tampermonkey.net/
 // @version      0.2
 // @include     https://www.haz.de/*
 // @include     https://www.neuepresse.de/*
 // @description  try to take over the world!
-// @author       You
+// @author       Me
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
 // @grant        none
 // ==/UserScript==
