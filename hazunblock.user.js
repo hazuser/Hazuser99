@@ -5,6 +5,7 @@
 // @include     https://www.haz.de/*
 // @include     https://www.neuepresse.de/*
 // @include     https://www.goettinger-tageblatt.de/*
+// @include     https://www.goettinger-tageblatt2.de/*
 // @description  try to take over the world!
 // @author       You
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
