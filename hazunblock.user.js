@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HAZ
 // @namespace    http://tampermonkey.net/
-// @version      0.4
+// @version      0.41
 // @include     https://www.haz.de/*
 // @include     https://www.neuepresse.de/*
 // @include     https://www.goettinger-tageblatt.de/*
@@ -17,7 +17,6 @@
     $("div[class^='ContentDetail__Grid-sc'").css('grid-template-columns','unset');
     if ( $('#piano-lightbox-article-haz').length > 0 ){
         var d = $('script[type="application/ld+json"]').text();
-        console.log(d);
 
         var startPos = d.indexOf("articleBody");
         var endPos = -1;
@@ -35,7 +34,9 @@
             $("div[class^='ArticleHeadstyled__ArticleTeaserContainer-sc'").empty()
                 .append("<p>"+article.replaceAll('. ','.<br>')+"</p>")
                 .css('height','unset')
-                .css('font-size','2em');
+                .css('font-size','x-large')
+                .css('font-family','Tahoma')
+                .css('line-height','1.5em');
         }
         $("div[class^='ArticleContentLoaderstyled__Gradient-sc'").remove();
         $("svg").remove();
