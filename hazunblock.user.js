@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HAZ
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @include     https://www.haz.de/*
 // @include     https://www.neuepresse.de/*
 // @include     https://www.goettinger-tageblatt.de/*
@@ -14,9 +14,10 @@
 
 (function() {
     'use strict';
-    if ( $('.pdb-article-body-paidcontentintro').length > 0 ){
-        var divArticle = $('.pdb-article-body');
+    $("div[class^='ContentDetail__Grid-sc'").css('grid-template-columns','unset');
+    if ( $('#piano-lightbox-article-haz').length > 0 ){
         var d = $('script[type="application/ld+json"]').text();
+        console.log(d);
 
         var startPos = d.indexOf("articleBody");
         var endPos = -1;
@@ -29,14 +30,15 @@
             article = d.substr(startPos+14,length);
         }
         if ( article != "" ){
-            console.log("article:"+article);
-            $('#erasmo').remove();
-            $('.pdb-article-body-paidcontentintro').remove();
-            $('.pdb-article-body-blurred').find('p,h1,h2,h3,h4,h5,h6,span,.pdb-embedimage-caption').remove();
-            $('.pdb-article-body-blurred').removeClass('pdb-article-body-blurred');
-
-            divArticle.append("<p>"+article+"</p>");
+//            console.log("article:"+article);
+            $('#piano-lightbox-article-haz').remove();
+            $("div[class^='ArticleHeadstyled__ArticleTeaserContainer-sc'").empty()
+                .append("<p>"+article.replaceAll('. ','.<br>')+"</p>")
+                .css('height','unset')
+                .css('font-size','2em');
         }
+        $("div[class^='ArticleContentLoaderstyled__Gradient-sc'").remove();
+        $("svg").remove();
     }
 
 
