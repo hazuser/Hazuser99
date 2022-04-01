@@ -1,20 +1,33 @@
 // ==UserScript==
-// @name         HAZ
-// @namespace    http://tampermonkey.net/
-// @version      0.41
-// @include     https://www.haz.de/*
-// @include     https://www.neuepresse.de/*
-// @include     https://www.goettinger-tageblatt.de/*
-// @include     https://www.goettinger-tageblatt2.de/*
-// @description  try to take over the world!
-// @author       You
-// @require http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
-// @grant        none
+// @name        Paywall Unblocker v2 updated
+// @name:de     Paywall Unblocker v2 updated
+// @license     MIT
+// @namespace   http://tampermonkey.net/
+// @version     0.43
+// @match       https://www.cellesche-zeitung.de/*
+// @match       https://www.dnn.de/*
+// @match       https://www.goettinger-tageblatt.de/*
+// @match       https://www.haz.de/*
+// @match       https://www.kn-online.de/*
+// @match       https://www.ln-online.de/*
+// @match       https://www.lvz.de/*
+// @match       https://www.maz-online.de/*
+// @match       https://www.mz-web.de/*
+// @match       https://www.neuepresse.de/*
+// @match       https://www.ostsee-zeitung.de/*
+// @match       https://www.paz-online.de/*
+// @match       https://www.rundschau-online.de/*
+// @match       https://www.sn-online.de/*
+// @match       https://www.waz-online.de/*
+// @description unblocks Madsack Paywall
+// @description:de  entfernt Madsack paywall
+// @author      You
+// @require     http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
+// @grant       none
 // ==/UserScript==
 
 (function() {
     'use strict';
-    $("div[class^='ContentDetail__Grid-sc'").css('grid-template-columns','unset');
     if ( $('#piano-lightbox-article-haz').length > 0 ){
         var d = $('script[type="application/ld+json"]').text();
 
@@ -29,19 +42,17 @@
             article = d.substr(startPos+14,length);
         }
         if ( article != "" ){
-//            console.log("article:"+article);
+            console.log("article:"+article);
             $('#piano-lightbox-article-haz').remove();
-            $("div[class^='ArticleHeadstyled__ArticleTeaserContainer-sc'").empty()
-                .append("<p>"+article.replaceAll('. ','.<br>')+"</p>")
+            $("div[class^='ArticleHeadstyled__ArticleTeaserContainer-sc-'")
                 .css('height','unset')
-                .css('font-size','x-large')
-                .css('font-family','Tahoma')
-                .css('line-height','1.5em');
+//                .css('font-size','x-large')
+//                .css('font-family','Tahoma')
+//                .css('line-height','1.5em')
+                .find("p:first").empty()
+                .append($("<p>").html(article.replaceAll('. ','.<br>')));
         }
         $("div[class^='ArticleContentLoaderstyled__Gradient-sc'").remove();
         $("svg").remove();
     }
-
-
-
 })();
