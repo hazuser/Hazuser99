@@ -3,7 +3,7 @@
 // @name:de     Paywall Unblocker v2 updated
 // @license     MIT
 // @namespace   http://tampermonkey.net/
-// @version     0.43
+// @version     0.44
 // @match       https://www.cellesche-zeitung.de/*
 // @match       https://www.dnn.de/*
 // @match       https://www.goettinger-tageblatt.de/*
@@ -28,7 +28,7 @@
 
 (function() {
     'use strict';
-    if ( $('#piano-lightbox-article-haz').length > 0 ){
+    if ( $("div[id^='piano-lightbox-article-'").length > 0 ){
         var d = $('script[type="application/ld+json"]').text();
 
         var startPos = d.indexOf("articleBody");
@@ -43,7 +43,7 @@
         }
         if ( article != "" ){
             console.log("article:"+article);
-            $('#piano-lightbox-article-haz').remove();
+            $("div[id^='piano-lightbox-article-'").remove();
             $("div[class^='ArticleHeadstyled__ArticleTeaserContainer-sc-'")
                 .css('height','unset')
 //                .css('font-size','x-large')
