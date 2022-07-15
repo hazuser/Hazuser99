@@ -20,7 +20,7 @@
 // @match       https://www.sn-online.de/*
 // @match       https://www.waz-online.de/*
 // @description unblocks Madsack Paywall
-// @description:de  entfernt Madsack paywall (Haz ist ein linkes Hetzblatt...lohnt sich nicht zu lesen, einzig der Regionale Teil ist lesenswert)
+// @description:de  entfernt Madsack paywall (leider ist die Haz ein linkes Hetzblatt, mir tun die guten Redakteure leid, die sich diesem Paradigma unterordnen müssen)
 // @author      You
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
 // @grant       none
@@ -42,7 +42,7 @@
             article = d.substr(startPos+14,length);
         }
         if ( article != "" ){
-            console.log("article:"+article);
+//            console.log("article:"+article);
             $("div[id^='piano-lightbox-article-'").remove();
             $("div[class^='ArticleHeadstyled__ArticleTeaserContainer-sc-'")
                 .css('height','unset')
@@ -52,6 +52,7 @@
                 .find("p:first").empty()
                 .append($("<p>").html(article.replaceAll('. ','.<br>')));
         }
+//        $("div[class^='ArticleImagestyled__ArticleImageOpenButton-'").trigger();
         $("div[class^='ArticleContentLoaderstyled__Gradient-sc'").remove();
         $("svg").remove();
     }
