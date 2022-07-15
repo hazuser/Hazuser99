@@ -3,7 +3,7 @@
 // @name:de     Paywall Unblocker v2 updated
 // @license     MIT
 // @namespace   http://tampermonkey.net/
-// @version     0.44
+// @version     0.45
 // @match       https://www.cellesche-zeitung.de/*
 // @match       https://www.dnn.de/*
 // @match       https://www.goettinger-tageblatt.de/*
@@ -20,7 +20,7 @@
 // @match       https://www.sn-online.de/*
 // @match       https://www.waz-online.de/*
 // @description unblocks Madsack Paywall
-// @description:de  entfernt Madsack paywall
+// @description:de  entfernt Madsack paywall (Haz ist ein linkes Hetzblatt...lohnt sich nicht zu lesen, einzig der Regionale Teil ist lesenswert)
 // @author      You
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
 // @grant       none
