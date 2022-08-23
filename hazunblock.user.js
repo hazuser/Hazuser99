@@ -3,7 +3,7 @@
 // @name:de     Paywall Unblocker v2 updated
 // @license     MIT
 // @namespace   http://tampermonkey.net/
-// @version     0.46
+// @version     0.47
 // @match       https://www.cellesche-zeitung.de/*
 // @match       https://www.dnn.de/*
 // @match       https://www.goettinger-tageblatt.de/*
