@@ -3,7 +3,7 @@
 // @name:de     Paywall Unblocker v2 updated
 // @license     MIT
 // @namespace   http://tampermonkey.net/
-// @version     0.47
+// @version     0.48
 // @match       https://www.cellesche-zeitung.de/*
 // @match       https://www.dnn.de/*
 // @match       https://www.goettinger-tageblatt.de/*
@@ -34,15 +34,19 @@ function Sleep(milliseconds) {
 }
 async function run(content) {
  console.log("Vor der sleep-Funktion");
- await Sleep(3000); // Pausiert die Funktion für 3 Sekunden
+ await Sleep(3000); // only needed by Chromoe -- todo
  console.log("Nach der Sleep Funktion");
     $("div[class^='ArticleContentLoaderstyled__Gradient-sc'").remove();
+    $("span[class^='ArticleHeadstyled__ArticleHeadPaidIconContainer-sc'").remove();
+    $("svg[class^='Buttonstyled__ButtonIcon-'").toggle();
     $("div[id^='piano-lightbox-article-'").remove();
-    $("svg").remove();
+    $("div[class^='ArticleImagestyled__ArticleImageCaptionContainer-'").css('display','unset');
+    $("div[class^='ArticleImagestyled__ArticleImageOpenButton-'").remove();
     $("div[id^='piano-lightbox-article-'").remove();
     $("div[class^='recommendationstyled__RecommendationContainer'").remove();
     $("div[class^='Adstyled__AdWrapper-sc'").remove();
     $("#template-container").remove();
+    $("#article").find("svg").remove();
     insert(content);
 }
     function insert(content){
@@ -69,8 +73,9 @@ async function run(content) {
             article = d.substr(startPos+14,length);
         }
         if ( article != "" ){
-           console.log("article:"+article);
+           // console.log("article:"+article);
         }
         run(article);
     }
+    // $(".blurred").css('-webkit-filter','unset').css('filter','unset');
 })();
