@@ -20,8 +20,8 @@
 // @match       https://www.sn-online.de/*
 // @match       https://www.waz-online.de/*
 // @description unblocks Madsack Paywall
-// @description:de  entfernt Madsack paywall (leider ist die Haz ein linkes Hetzblatt, mir tun die guten Redakteure leid, die sich diesem Paradigma unterordnen müssen)
-// @author      You
+// @description:de  entfernt Madsack Paywall
+// @author      hazuser99
 // @require     https://releases.jquery.com/git/jquery-1.x-git.min.js
 // @grant       none
 // ==/UserScript==
@@ -77,5 +77,6 @@ async function run(content) {
         }
         run(article);
     }
+    // todo
     // $(".blurred").css('-webkit-filter','unset').css('filter','unset');
 })();
