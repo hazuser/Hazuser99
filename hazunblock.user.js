@@ -3,7 +3,7 @@
 // @name:de     Paywall Unblocker v2 updated
 // @license     MIT
 // @namespace   http://tampermonkey.net/
-// @version     0.48
+// @version     0.49
 // @match       https://www.cellesche-zeitung.de/*
 // @match       https://www.dnn.de/*
 // @match       https://www.goettinger-tageblatt.de/*
@@ -29,54 +29,68 @@
 (function() {
     'use strict';
 
-function Sleep(milliseconds) {
- return new Promise(resolve => setTimeout(resolve, milliseconds));
-}
 async function run(content) {
- console.log("Vor der sleep-Funktion");
- await Sleep(3000); // only needed by Chromoe -- todo
- console.log("Nach der Sleep Funktion");
-    $("div[class^='ArticleContentLoaderstyled__Gradient-sc'").remove();
-    $("span[class^='ArticleHeadstyled__ArticleHeadPaidIconContainer-sc'").remove();
-    $("svg[class^='Buttonstyled__ButtonIcon-'").toggle();
-    $("div[id^='piano-lightbox-article-'").remove();
-    $("div[class^='ArticleImagestyled__ArticleImageCaptionContainer-'").css('display','unset');
-    $("div[class^='ArticleImagestyled__ArticleImageOpenButton-'").remove();
-    $("div[id^='piano-lightbox-article-'").remove();
-    $("div[class^='recommendationstyled__RecommendationContainer'").remove();
-    $("div[class^='Adstyled__AdWrapper-sc'").remove();
-    $("#template-container").remove();
-    $("#article").find("svg").remove();
     insert(content);
 }
-    function insert(content){
-        $("div[class^='ArticleHeadstyled__ArticleTeaserContainer-sc'")
-                .css('height','unset')
-//                .css('font-size','x-large')
-//                .css('font-family','Tahoma')
-//                .css('line-height','1.5em')
-                .find("p:first").empty()
-                // .empty()
-                .append($("<p>").html(content.replaceAll('. ','.<br>')));
+    async function check4BadStuff(){
+        // console.log("check");
+        $("div[class^='ArticleContentLoaderstyled__Gradient-sc'").remove();
+        $("span[class^='ArticleHeadstyled__ArticleHeadPaidIconContainer-sc'").remove();
+        $("svg[class^='Buttonstyled__ButtonIcon-'").toggle();
+        $("div[id^='piano-lightbox-article-'").remove();
+        $("div[class^='ArticleImagestyled__ArticleImageCaptionContainer-'").css('display','unset');
+        $("div[class^='ArticleImagestyled__ArticleImageOpenButton-'").remove();
+        $("div[id^='piano-lightbox-article-'").remove();
+        $("div[class^='recommendationstyled__RecommendationContainer'").remove();
+        $("div[class^='Adstyled__AdWrapper-sc'").remove();
+        $("#template-container").remove();
+        $("#article").find("svg").remove();
     }
-        if ( $("div[id^='piano-lightbox-article-'").length > 0 ){
-        var d = $('script[type="application/ld+json"]').text();
+    function loopFunction(delay, f,callback){
+        var loop = function(){
+            f;
+            callback();
+            setTimeout(loop, delay);
+        }; loop();
+    };
 
-        var startPos = d.indexOf("articleBody");
-        var endPos = -1;
-        var article = "";
-        if ( startPos != -1 ) {
-            endPos = d.indexOf("\",\"",startPos+14);
+    function insert(content){
+        var $preArticle = $("div[class^='ArticleHeadstyled__ArticleTeaserContainer-sc'")
+                .find("p:first").html();
+        var $content = content.replaceAll('. ','.<br>');
+
+        if ( $preArticle.length != $content.length + 7 ){
+            $("div[class^='ArticleHeadstyled__ArticleTeaserContainer-sc'")
+                .css('height','unset')
+                // .css('font-size','x-large')
+                // .css('font-family','Tahoma')
+                // .css('line-height','1.5em')
+                .find("p:first").empty()
+                .append($("<p>").html($content));
         }
-        if ( endPos != -1 ){
-            var length = endPos - startPos - 14;
-            article = d.substr(startPos+14,length);
-        }
-        if ( article != "" ){
-           // console.log("article:"+article);
-        }
-        run(article);
     }
+
+        if ( $("div[id^='piano-lightbox-article-'").length > 0 )
+        {
+            var d = $('script[type="application/ld+json"]').text();
+
+            var startPos = d.indexOf("articleBody");
+            var endPos = -1;
+            var article = "";
+            if ( startPos != -1 ) {
+                endPos = d.indexOf("\",\"",startPos+14);
+            }
+            if ( endPos != -1 ){
+                var length = endPos - startPos - 14;
+                article = d.substr(startPos+14,length);
+            }
+            // run(article);
+            loopFunction(1000, check4BadStuff(),function(){
+                run(article);
+                check4BadStuff();
+                console.log("timer f");
+            });
+        }
     // todo
     // $(".blurred").css('-webkit-filter','unset').css('filter','unset');
 })();
