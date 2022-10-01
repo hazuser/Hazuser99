@@ -3,8 +3,9 @@
 // @name:de     Paywall Unblocker v2 updated
 // @license     MIT
 // @namespace   http://tampermonkey.net/
-// @version     0.49
+// @version     0.50
 // @match       https://www.cellesche-zeitung.de/*
+// @match       https://www.rnd.de/*
 // @match       https://www.dnn.de/*
 // @match       https://www.goettinger-tageblatt.de/*
 // @match       https://www.haz.de/*
@@ -29,9 +30,10 @@
 (function() {
     'use strict';
 
-async function run(content) {
-    insert(content);
-}
+    async function run(content) {
+        insert(content);
+    }
+
     async function check4BadStuff(){
         // console.log("check");
         $("div[class^='ArticleContentLoaderstyled__Gradient-sc'").remove();
@@ -84,11 +86,10 @@ async function run(content) {
                 var length = endPos - startPos - 14;
                 article = d.substr(startPos+14,length);
             }
-            // run(article);
             loopFunction(1000, check4BadStuff(),function(){
                 run(article);
                 check4BadStuff();
-                console.log("timer f");
+                console.log("checking for AD Stuff to Remove");
             });
         }
     // todo
