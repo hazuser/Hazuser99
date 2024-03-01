@@ -3,7 +3,7 @@
 // @name:de     Paywall Unblocker v2 updated
 // @license     MIT
 // @namespace   http://tampermonkey.net/
-// @version     0.51
+// @version     0.52
 // @match        https://www.allgemeine-zeitung.de/*
 // @match        https://www.dnn.de/*
 // @match        https://www.echo-online.de/*
@@ -96,7 +96,8 @@
                          console.log("paywall");
                          GM.addStyle('[class^="ArticleContentLoaderstyled__Gradient-"],[id^="piano-lightbox-article-"],article > svg {display:none;}');
                          GM.addStyle(".h2-pw {font-family: 'DIN Next LT Pro', Arial, Roboto, sans-serif; font-weight:700; letter-spacing:-0.25px; font-size:22px; padding-bottom:4px;}");
-                         // $("div[class^='ArticleContentLoaderstyled__Gradient-sc'").remove();
+                         $("div[class='OUTBRAIN'").remove();
+                         $("div[class^='Adstyled__AdWrapper-sc'").remove();
                          // $("span[class^='ArticleHeadstyled__ArticleHeadPaidIconContainer-sc'").remove();
                          paywall.classList.remove(paywall.classList.item(1));
                          var articleParagraph = paywall.querySelector("div > p");
@@ -122,6 +123,8 @@
                              // $el.style.fontFamily  = "Source Serif Pro, Palatino, Droid Serif, serif";
                          });
                      }
+                     $("div[class='OUTBRAIN'").remove();
+                     $("div[class^='Adstyled__AdWrapper-sc'").remove();
                      break;
                  }
              case "www.ksta.de":
