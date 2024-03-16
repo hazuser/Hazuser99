@@ -3,7 +3,7 @@
 // @name:de     Paywall Unblocker v2 updated
 // @license     MIT
 // @namespace   http://tampermonkey.net/
-// @version     0.56
+// @version     0.57
 // @match        https://www.allgemeine-zeitung.de/*
 // @match        https://www.dnn.de/*
 // @match        https://www.echo-online.de/*
@@ -94,10 +94,10 @@
                     if (paywall){
                         console.log("paywall");
                         GM.addStyle('[class^="ArticleContentLoaderstyled__Gradient-"],[id^="piano-lightbox-article-"],article > svg {display:none;}');
+                        GM.addStyle('[class^="Articlestyled__ArticleBodyWrapper-sc-"],[id^="piano-lightbox-article-"],article > svg {display:none;}');
                         GM.addStyle(".h2-pw {font-family: 'DIN Next LT Pro', Arial, Roboto, sans-serif; font-weight:700; letter-spacing:-0.25px; font-size:22px; padding-bottom:4px;}");
                         $("div[class='OUTBRAIN'").remove();
                         // $("div[class^='Adstyled__AdWrapper-sc'").remove();
-                        // $("span[class^='ArticleHeadstyled__ArticleHeadPaidIconContainer-sc'").remove();
                         paywall.classList.remove(paywall.classList.item(1));
                         var articleParagraph = paywall.querySelector("div > p");
                         jsonText = document.querySelector("#fusion-metadata").innerHTML.split(/;Fusion\.globalContent.*?=/)[1];
