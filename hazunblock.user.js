@@ -3,7 +3,7 @@
 // @name:de     Paywall Unblocker v2 updated
 // @license     MIT
 // @namespace   http://tampermonkey.net/
-// @version     0.55
+// @version     0.56
 // @match        https://www.allgemeine-zeitung.de/*
 // @match        https://www.dnn.de/*
 // @match        https://www.echo-online.de/*
@@ -40,7 +40,6 @@
     insert();
 
     async function caesar(){
-        console.log("caesar");
         var url,site,html,parser,htmlDoc,articleText,jsonText,jsonObj,locationText;
         switch (location.hostname) {
             case "www.allgemeine-zeitung.de":
@@ -97,7 +96,7 @@
                         GM.addStyle('[class^="ArticleContentLoaderstyled__Gradient-"],[id^="piano-lightbox-article-"],article > svg {display:none;}');
                         GM.addStyle(".h2-pw {font-family: 'DIN Next LT Pro', Arial, Roboto, sans-serif; font-weight:700; letter-spacing:-0.25px; font-size:22px; padding-bottom:4px;}");
                         $("div[class='OUTBRAIN'").remove();
-                        $("div[class^='Adstyled__AdWrapper-sc'").remove();
+                        // $("div[class^='Adstyled__AdWrapper-sc'").remove();
                         // $("span[class^='ArticleHeadstyled__ArticleHeadPaidIconContainer-sc'").remove();
                         paywall.classList.remove(paywall.classList.item(1));
                         var articleParagraph = paywall.querySelector("div > p");
