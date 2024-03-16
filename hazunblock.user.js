@@ -3,7 +3,7 @@
 // @name:de     Paywall Unblocker v2 updated
 // @license     MIT
 // @namespace   http://tampermonkey.net/
-// @version     0.53
+// @version     0.54
 // @match        https://www.allgemeine-zeitung.de/*
 // @match        https://www.dnn.de/*
 // @match        https://www.echo-online.de/*
@@ -139,7 +139,7 @@
                         });
                     }
                     $("div[class='OUTBRAIN'").remove();
-                    $("div[class^='Adstyled__AdWrapper-sc'").remove();
+                    $("div[class^='Adstyled__AdWrapper-sc-'").remove();
                     break;
                 }
             case "www.ksta.de":
